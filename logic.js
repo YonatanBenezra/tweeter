@@ -65,20 +65,39 @@ const Tweeter = () => {
             ]
         }
     ]
-let postIdCounter = 2
-let commentIdCounter = 6
-const getPosts = () => posts
-const addPost = (text) => {
-    postIdCounter++
-posts.push(
-    {text: text, id: "p"+postIdCounter, comments: []}
-) 
-}
-const removePost = (postId) => posts.splice(postId-1,1)
-return{
+    let postIdCounter = 2
+    let commentIdCounter = 6
+    const getPosts = () => posts
+    const addPost = (text) => {
+        postIdCounter++
+        posts.push(
+            {
+                text: text,
+                id: "p" + postIdCounter,
+                comments: []
+            }
+        )
+    }
+    const removePost = (postId) => posts.splice(postId - 1, 1)
+
+    const addComment = (postId, text) => {
+        commentIdCounter++
+        posts[postId-1].comments.push(
+        {
+             text: text,
+              id: "c" + commentIdCounter
+            })
+    }
+
+    const removeComment = (postId,commentID) => {
+        posts[postId-1].comments.splice(commentID -1,1)
+    }
+return {
     getPosts,
     addPost,
-    removePost
+    removePost,
+    addComment,
+    removeComment
 }
 
 
@@ -105,7 +124,7 @@ return{
 
 
 
-}
+    }
 
 
 
