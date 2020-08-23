@@ -68,6 +68,7 @@ const Tweeter = () => {
     let postIdCounter = 2
     let commentIdCounter = 6
     const getPosts = () => posts
+
     const addPost = (text) => {
         postIdCounter++
         posts.push(
@@ -78,70 +79,44 @@ const Tweeter = () => {
             }
         )
     }
-    const removePost = (postId) => posts.splice(postId - 1, 1)
-
+    const removePost = (postId) => {
+        for (let i = 0; i < posts.length; i++) {
+            if (postId === posts[i].id) {
+                posts.splice(i, 1)
+            }
+        }
+    }
     const addComment = (postId, text) => {
         commentIdCounter++
-        posts[postId-1].comments.push(
-        {
-             text: text,
-              id: "c" + commentIdCounter
-            })
+        for (let i = 0; i < posts.length; i++) {
+            if (postId === posts[i].id) {
+                console.log(posts[i])
+                posts[i].comments.push(
+                    {
+                        id: "c" + commentIdCounter,
+                        text: text
+                    }
+                )
+            }
+        }
     }
 
-    const removeComment = (postId,commentID) => {
-        posts[postId-1].comments.splice(commentID -1,1)
+    const removeComment = (postId, commentID) => {
+        for (let i = 0; i < posts.length; i++) {
+            if (postId === posts[i].id) {
+                for (x = 0; x < posts[i].comments.length; x++) {
+                    if (commentID === posts[i].comments[x].id) {
+                        posts[i].comments.splice(x, 1)
+                    }
+                }
+            }
+        }
     }
-return {
-    getPosts,
-    addPost,
-    removePost,
-    addComment,
-    removeComment
+    return {
+        getPosts,
+        addPost,
+        removePost,
+        addComment,
+        removeComment
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
